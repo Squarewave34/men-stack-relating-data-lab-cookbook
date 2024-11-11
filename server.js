@@ -44,7 +44,13 @@ app.use(passUserToView)
 
 // these two must be below the session init
 const authController = require('./controllers/auth')
+const recipesController = require('./controllers/recipes')
+const ingredientsController = require('./controllers/ingredients')
+
+
 app.use("/auth", authController)
+app.use("/recipes", recipesController)
+app.use("/ingredients", ingredientsController)
 
 app.use((req, res, next) =>{
   if(req.session.message){
