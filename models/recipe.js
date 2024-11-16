@@ -5,14 +5,14 @@ const recipeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  name:{
+  instructions:{
     type: String,
   },
-  name:{
+  owner:{
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
-  name:{
+  ingredients:{
     type: [mongoose.Schema.Types.ObjectId],
   },
 },{
