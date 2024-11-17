@@ -7,9 +7,9 @@ const router = express.Router()
 
 router.get('/', async(req, res)=>{
   try{
-    const populatedRecipes = await Recipe.find({}).populate('owner')
-    console.log(populatedRecipes);
-    res.render('recipes/index.ejs', {recipes: populatedRecipes})
+    const id = req.session.user._id;
+    const recipes = await Recipe.find({owner: id})
+    res.render('recipes/index.ejs', {recipes})
   }catch(error){
     console.log(error);
     res.redirect('/')
