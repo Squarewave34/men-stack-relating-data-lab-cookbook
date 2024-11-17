@@ -20,7 +20,12 @@ router.get('/new', async(req, res)=>{
 
 router.post('/', async (req, res) => {
   req.body.owner = req.session.user._id;
-  await Ingredient.create(req.body);
+  const ingredient = await Ingredient.findOne({owner: req.body.owner, name: req.body.name})
+
+  if(!ingredient){
+    await Ingredient.create(req.body);
+  }
+
   res.redirect('../ingredients');
 });
 

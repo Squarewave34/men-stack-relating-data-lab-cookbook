@@ -7,11 +7,19 @@
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
+
   <h1>ingredients</h1>
+
+  <form method="post" action="/ingredients">
+    <label for="name">Name of ingredient:</label>
+    <input type="text" name="name" id="name" />
+  
+    <button type="submit">Add ingredient</button>
+  </form>
+
   <% ingredients.forEach((ingredient)=>{ %>
     <h2><%= ingredient.name %></h2>
   <% }) %>
 
-  <a href="/ingredients/new">Add a new ingredient</a>
 </body>
 </html>
