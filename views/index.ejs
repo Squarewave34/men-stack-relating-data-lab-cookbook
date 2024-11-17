@@ -8,5 +8,9 @@
   <body>
     <%- include('./partials/_navbar.ejs') %>
     <h1>Welcome to CookBook</h1>
+    <% recipes.forEach((recipe)=>{ %>
+      <h2><%= recipe.name %></h2>
+      <h3>by <%= recipe.owner.username %> </h3>
+    <% }) %>
   </body>
 </html>

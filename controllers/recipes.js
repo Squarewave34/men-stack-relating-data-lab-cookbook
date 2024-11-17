@@ -6,8 +6,14 @@ const Ingredient = require('../models/ingredient')
 const router = express.Router()
 
 router.get('/', async(req, res)=>{
-  const recipes = await Recipe.find()
-  res.render('recipes/index.ejs', {recipes})
+  try{
+    const populatedRecipes = await Recipe.find({}).populate('owner')
+    console.log(populatedRecipes);
+    res.render('recipes/index.ejs', {recipes: populatedRecipes})
+  }catch(error){
+    console.log(error);
+    res.redirect('/')
+  }
 })
 
 router.get('/new', async(req, res)=>{
@@ -18,7 +24,7 @@ router.get('/new', async(req, res)=>{
 router.post('/', async (req, res) => {
   req.body.owner = req.session.user._id;
   await Recipe.create(req.body);
-  res.redirect('/');
+  res.redirect('/recipes/');
 });
 
 router.get('/:recipeId', async(req, res)=>{

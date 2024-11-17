@@ -43,11 +43,12 @@ app.use(
 app.use(passUserToView)
 
 // these two must be below the session init
+const generalController = require('./controllers/general')
 const authController = require('./controllers/auth')
 const recipesController = require('./controllers/recipes')
 const ingredientsController = require('./controllers/ingredients')
 
-
+app.use("/", generalController)
 app.use("/auth", authController)
 app.use("/recipes", recipesController)
 app.use("/ingredients", ingredientsController)
@@ -61,10 +62,6 @@ app.use((req, res, next) =>{
   }
   next()
 })
-
-app.get("/", (req, res) => {
-  res.render("index.ejs")
-});
 
 app.get("/vip-lounge", isSignedIn, (req, res) => {
   res.send(`Welcome to the party ${req.session.user.username}.`);
