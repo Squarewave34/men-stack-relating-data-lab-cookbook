@@ -63,4 +63,20 @@ router.put('/:recipeId', async(req, res)=>{
   }
 })
 
+router.delete('/:recipeId', async(req, res)=>{
+  try{
+    const recipe = await Recipe.findById(req.params.recipeId)
+    if(recipe.owner.equals(req.session.user._id)){
+      await recipe.deleteOne()
+      res.redirect('/recipes/success')
+    }else{
+      res.send("you can't delete a recipe that isn't yours")
+    }
+
+  }catch(error){
+    console.log(error);
+    res.redirect('/')
+  }
+})
+
 module.exports = router
