@@ -14,7 +14,7 @@ router.post("/sign-up", async(req, res)=>{
   })
 
   if(userInDatabase){
-    return res.send("already exists stupid")
+    return res.send("already exists")
   }
 
   if(req.body.password !== req.body.confirmPassword){

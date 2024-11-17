@@ -16,19 +16,19 @@ router.get('/', async(req, res)=>{
   }
 })
 
-router.get('/users', async(req, res)=>{
+router.get('/home/users', async(req, res)=>{
   const users = await User.find()
-  res.render('users.ejs', {users})
+  res.render('home/users.ejs', {users})
 })
 
-router.get('/:userId', async(req, res)=>{
+router.get('/home/:userId', async(req, res)=>{
   const id = req.params.userId
   const user = await User.findById(id)
   const recipes = await Recipe.find({owner: id})
-  res.render('user.ejs', {user, recipes})
+  res.render('home/user.ejs', {user, recipes})
 })
 
-router.get('/:userId/:recipeId', async(req, res)=>{
+router.get('/home/:userId/:recipeId', async(req, res)=>{
   const id = req.params.userId
   const recipe = await Recipe.findById(req.params.recipeId)
   const ingredients = await Ingredient.find({owner: id})
@@ -40,7 +40,7 @@ router.get('/:userId/:recipeId', async(req, res)=>{
     }
   })
 
-  res.render('recipe.ejs', {recipe, ingredients: usedIngredients})
+  res.render('home/recipe.ejs', {recipe, ingredients: usedIngredients})
 })
 
 module.exports = router

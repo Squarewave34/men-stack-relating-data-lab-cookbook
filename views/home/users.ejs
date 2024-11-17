@@ -6,9 +6,9 @@
   <title>Document</title>
 </head>
 <body>
-  <h1><%= user.username %></h1>
-  <% recipes.forEach((recipe)=>{ %>
-    <a href="/<%= user._id %>/<%= recipe._id %>"><%= recipe.name %></a>
+  <h1>View all users</h1>
+  <% users.forEach((user)=>{ %>
+    <a href="/home/<%= user._id %>"><%= user.username %><a>
   <% }) %>
 </body>
 </html>
