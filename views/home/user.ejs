@@ -6,6 +6,7 @@
   <title>Document</title>
 </head>
 <body>
+  <%- include('../partials/_navbar.ejs') %>
   <h1><%= user.username %></h1>
   <% recipes.forEach((recipe)=>{ %>
     <a href="/home/<%= user._id %>/<%= recipe._id %>"><%= recipe.name %></a>

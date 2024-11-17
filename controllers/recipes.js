@@ -34,7 +34,16 @@ router.post('/', async (req, res) => {
 router.get('/:recipeId', async(req, res)=>{
   const id=req.params.recipeId
   const recipe = await Recipe.findById(id)
-  res.render('recipes/show.ejs', {recipe: recipe})
+  const ingredients = await Ingredient.find({owner: req.session.user._id})
+  let usedIngredients = []
+
+  ingredients.forEach((ingredient)=>{
+    if(recipe.ingredients.includes(ingredient._id)){
+      usedIngredients.push(ingredient.name)
+    }
+  })
+
+  res.render('recipes/show.ejs', {recipe, ingredients: usedIngredients})
 })
 
 router.get('/:recipeId/edit', async(req, res)=>{
