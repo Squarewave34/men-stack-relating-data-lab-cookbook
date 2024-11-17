@@ -37,4 +37,30 @@ router.get('/:recipeId', async(req, res)=>{
   res.render('recipes/show.ejs', {recipe: recipe})
 })
 
+router.get('/:recipeId/edit', async(req, res)=>{
+  try{
+    const populatedRecipes = await Recipe.findById(req.params.recipeId).populate('owner')
+    const ingredients = await Ingredient.find()
+    res.render('recipes/edit.ejs', {recipe: populatedRecipes, ingredient: ingredients})
+  }catch(error){
+    console.log(error);
+    res.redirect('/')
+  }
+})
+
+router.put('/:recipeId', async(req, res)=>{
+  try{
+    const recipe = await Recipe.findById(req.params.recipeId)
+    if(recipe.owner.equals(req.session.user._id)){
+      await recipe.updateOne(req.body)
+      res.redirect('/recipes/success')
+    }else{
+      res.send("you can't update a recipe that isn't yours")
+    }
+  }catch(error){
+    console.log(error);
+    redirect('/')
+  }
+})
+
 module.exports = router

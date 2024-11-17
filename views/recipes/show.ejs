@@ -8,5 +8,7 @@
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1><%= recipe.name %></h1>
+
+  <a href="/recipes/<%= recipe._id %>/edit">Edit this recipe</a>
 </body>
 </html>
