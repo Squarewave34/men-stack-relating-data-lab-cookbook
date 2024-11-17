@@ -1,6 +1,5 @@
 const express = require('express')
 const Recipe = require('../models/recipe')
-const User = require('../models/user')
 const Ingredient = require('../models/ingredient')
 
 const router = express.Router()
