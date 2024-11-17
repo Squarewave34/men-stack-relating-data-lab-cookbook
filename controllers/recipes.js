@@ -17,7 +17,8 @@ router.get('/', async(req, res)=>{
 })
 
 router.get('/new', async(req, res)=>{
-  const ingredients = await Ingredient.find()
+  const id = req.session.user._id;
+  const ingredients = await Ingredient.find({owner: id})
   res.render('recipes/new.ejs', {ingredient: ingredients})
 })
 
