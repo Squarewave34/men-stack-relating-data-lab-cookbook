@@ -21,10 +21,14 @@ router.get('/new', async(req, res)=>{
   res.render('recipes/new.ejs', {ingredient: ingredients})
 })
 
+router.get("/success", async(req, res)=>{
+  res.render("recipes/success.ejs")
+})
+
 router.post('/', async (req, res) => {
   req.body.owner = req.session.user._id;
   await Recipe.create(req.body);
-  res.redirect('/recipes/');
+  res.redirect('/recipes/success');
 });
 
 router.get('/:recipeId', async(req, res)=>{
