@@ -25,4 +25,10 @@ router.post('/', async (req, res) => {
   res.redirect('../ingredients');
 });
 
+router.post('/quickAddition', async(req, res)=>{
+  req.body.owner = req.session.user._id;
+  await Ingredient.create(req.body);
+  res.redirect('../recipes/new');
+})
+
 module.exports = router
